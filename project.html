@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Project — Mayank Sharma</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body class="ms-bodyRoot_91a7">
+    <!-- Custom cursor -->
+    <div class="ms-cursorDot_0c01" id="msCursorDot"></div>
+    <div class="ms-cursorRing_7c12" id="msCursorRing"></div>
+
+    <header class="ms-topNav_5c3e">
+      <a class="ms-brandChip_93d2" href="index.html">
+        <span class="ms-brandDot_4b2f"></span>
+        <span>Mayank</span>
+      </a>
+
+      <nav class="ms-navLinks_18f1">
+        <a class="ms-navLink_2a1a" href="index.html#msSectionProjects"
+          >Back to Projects</a
+        >
+      </nav>
+
+      <a class="ms-navCtaBtn_7d9a" href="index.html#msSectionContact">
+        <span class="ms-navCtaIcon_1c77">✦</span>
+        <span class="ms-navCtaText_0bf1">Contact</span>
+      </a>
+    </header>
+
+    <main class="ms-mainFlow_2b1e">
+      <section class="ms-sectionWrap_0a7b">
+        <div class="ms-sectionHead_4b90 ms-revealItem_a0d2">
+          <p class="ms-sectionKicker_998a" id="projKicker">Project</p>
+          <h1 class="ms-sectionTitle_9b83" id="projTitle">Loading…</h1>
+          <p class="ms-sectionDesc_33d6" id="projDesc">Please wait.</p>
+        </div>
+
+        <div class="ms-aboutGrid_1f91">
+          <div class="ms-glassCard_5a40 ms-revealItem_a0d2">
+            <h3 class="ms-cardTitle_2d17">Stack</h3>
+            <p class="ms-cardText_0d7d" id="projStack">—</p>
+          </div>
+
+          <div class="ms-glassCard_5a40 ms-revealItem_a0d2">
+            <h3 class="ms-cardTitle_2d17">Role</h3>
+            <p class="ms-cardText_0d7d" id="projRole">—</p>
+          </div>
+
+          <div class="ms-glassCard_5a40 ms-revealItem_a0d2">
+            <h3 class="ms-cardTitle_2d17">Highlights</h3>
+            <ul class="ms-bulletList_4a1e" id="projHighlights"></ul>
+          </div>
+        </div>
+
+        <div class="ms-dividerGlow_0a22" aria-hidden="true"></div>
+
+        <div class="ms-glassCard_5a40 ms-revealItem_a0d2">
+          <h3 class="ms-cardTitle_2d17">Screenshots</h3>
+          <div class="ms-modalGallery_7a2f" id="projGallery"></div>
+        </div>
+
+        <div class="ms-dividerGlow_0a22" aria-hidden="true"></div>
+
+        <div class="ms-quotePanel_55df ms-revealItem_a0d2">
+          <p class="ms-quoteText_1df2">
+            Want this kind of UI for your product?
+          </p>
+          <p class="ms-quoteBy_8a1b">— Reach out on the contact section.</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Image Preview (Lightbox) -->
+    <div class="ms-imagePreview_9a1c" id="msImagePreview" hidden>
+      <button
+        class="ms-imagePreviewClose_3c61"
+        type="button"
+        id="msImagePreviewClose"
+        aria-label="Close image"
+      >
+        ×
+      </button>
+      <img id="msImagePreviewImg" alt="Project preview" />
+    </div>
+
+    <script>
+      // Minimal JS here so project.html works standalone
+      (function () {
+        // Cursor (same behavior as index)
+        const dot = document.getElementById("msCursorDot");
+        const ring = document.getElementById("msCursorRing");
+        let mx = window.innerWidth / 2,
+          my = window.innerHeight / 2;
+        let rx = mx,
+          ry = my;
+
+        window.addEventListener(
+          "mousemove",
+          (e) => {
+            mx = e.clientX;
+            my = e.clientY;
+            if (dot) dot.style.transform = `translate(${mx}px, ${my}px)`;
+          },
+          { passive: true },
+        );
+
+        const loop = () => {
+          rx += (mx - rx) * 0.12;
+          ry += (my - ry) * 0.12;
+          if (ring) ring.style.transform = `translate(${rx}px, ${ry}px)`;
+          requestAnimationFrame(loop);
+        };
+        requestAnimationFrame(loop);
+
+        const msHoverTargets = "a, button, .ms-modalGallery_7a2f img";
+        document.addEventListener("mouseover", (e) => {
+          if (e.target.closest(msHoverTargets))
+            ring?.classList.add("ms-cursorHover_2a9b");
+        });
+        document.addEventListener("mouseout", (e) => {
+          if (e.target.closest(msHoverTargets))
+            ring?.classList.remove("ms-cursorHover_2a9b");
+        });
+
+        // Read query
+        const params = new URLSearchParams(window.location.search);
+        const slug = params.get("project") || "credita-finance";
+
+        // Project data (edit/add more)
+        const data = {
+          "credita-finance": {
+            title: "Credita Finance",
+            desc: "Finance-based website with clean UI, responsive layout, and sharp structure.",
+            stack: "HTML • CSS • JavaScript • GitHub • PostgreSQL • Nodejs",
+            role: "Developer",
+            highlights: [
+              "Responsive layout across devices",
+              "Clean section structure",
+              ,
+            ],
+            images: [
+              "images/CF 2.PNG",
+              "images/CF 4.PNG",
+              "images/CF 8.PNG",
+              "images/CF 9.PNG",
+            ],
+          },
+          "project-two": {
+            title: "Project Name #2",
+            desc: "Replace with your real project details.",
+            stack: "—",
+            role: "—",
+            highlights: [
+              "Add highlight 1",
+              "Add highlight 2",
+              "Add highlight 3",
+            ],
+            images: ["images/p2-1.png", "images/p2-2.png", "images/p2-3.png"],
+          },
+          "project-three": {
+            title: "Project Name #3",
+            desc: "Replace with your real project details.",
+            stack: "—",
+            role: "—",
+            highlights: [
+              "Add highlight 1",
+              "Add highlight 2",
+              "Add highlight 3",
+            ],
+            images: ["images/p3-1.png", "images/p3-2.png", "images/p3-3.png"],
+          },
+        };
+
+        const p = data[slug] || data["credita-finance"];
+
+        document.getElementById("projTitle").textContent = p.title;
+        document.getElementById("projDesc").textContent = p.desc;
+        document.getElementById("projStack").textContent = p.stack;
+        document.getElementById("projRole").textContent = p.role;
+
+        const ul = document.getElementById("projHighlights");
+        ul.innerHTML = "";
+        p.highlights.forEach((h) => {
+          const li = document.createElement("li");
+          li.textContent = h;
+          ul.appendChild(li);
+        });
+
+        const gal = document.getElementById("projGallery");
+        gal.innerHTML = "";
+        p.images.forEach((src, i) => {
+          const img = document.createElement("img");
+          img.src = src;
+          img.alt = `${p.title} screenshot ${i + 1}`;
+          img.loading = "lazy";
+          gal.appendChild(img);
+        });
+
+        // Lightbox
+        const preview = document.getElementById("msImagePreview");
+        const previewImg = document.getElementById("msImagePreviewImg");
+        const previewClose = document.getElementById("msImagePreviewClose");
+
+        const openPreview = (src, alt) => {
+          previewImg.src = src;
+          previewImg.alt = alt || "Project preview";
+          preview.hidden = false;
+        };
+        const closePreview = () => {
+          preview.hidden = true;
+          previewImg.src = "";
+        };
+
+        document.addEventListener("click", (e) => {
+          const img = e.target.closest(".ms-modalGallery_7a2f img");
+          if (img) openPreview(img.src, img.alt);
+
+          if (preview && !preview.hidden) {
+            const clickedImage = e.target.closest("#msImagePreviewImg");
+            const clickedClose = e.target.closest("#msImagePreviewClose");
+            if (!clickedImage || clickedClose) closePreview();
+          }
+        });
+
+        previewClose.addEventListener("click", closePreview);
+        window.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") closePreview();
+        });
+
+        // Reveal
+        const revealTargets = Array.from(
+          document.querySelectorAll(".ms-revealItem_a0d2"),
+        );
+        const obs = new IntersectionObserver(
+          (entries) =>
+            entries.forEach(
+              (entry) =>
+                entry.isIntersecting &&
+                entry.target.classList.add("ms-revealOn_55a1"),
+            ),
+          { threshold: 0.12 },
+        );
+        revealTargets.forEach((el) => obs.observe(el));
+      })();
+    </script>
+  </body>
+</html>
